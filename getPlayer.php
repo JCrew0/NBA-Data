@@ -44,7 +44,7 @@ try
       </ul>
     </div>
     
-    <h1> Search Players By School</h1>
+    <h1> Search Players By College</h1>
     <!-- This is the start of the form. This form has one text field and one button.
       See the project.css file to note how form is stylized.-->
     <form method="post">
