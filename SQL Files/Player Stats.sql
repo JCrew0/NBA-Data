@@ -143,3 +143,67 @@ SELECT @rpg;
 
 -- Incorrect call
 CALL getRPG('Reggie Jackson', '2018-2019', @rpg);
+
+
+-- Get rebounds per game for a certain player in a certain season
+DROP PROCEDURE IF EXISTS getAPG;
+
+DELIMITER $$
+CREATE PROCEDURE getAPG(IN playerName VARCHAR(100), IN season VARCHAR(100), OUT apg VARCHAR(100))
+
+BEGIN         
+	IF season = '2016-17' OR season = '2017-18' OR season = '2018-19'
+		OR season = '2019-20' OR season ='2020-21' THEN
+        
+		SELECT CONCAT(playerName, ' ', SUM(assists)/COUNT(tempID))
+		INTO apg 
+		FROM player_gamelogs
+		WHERE seasonYear = season AND player = playerName;
+	ELSE 
+		SELECT CONCAT('Season inserted is NOT VALID- reenter in the correct format');
+	END IF;
+END $$
+ 
+ -- testing
+CALL getAPG('James Harden', '2016-17', @apg);
+SELECT @apg;
+
+CALL getAPG('Lebron James', '2016-17', @apg);
+SELECT @apg;
+
+CALL getAPG('Dwyane Wade', '2016-17', @apg);
+SELECT @apg;
+
+-- Incorrect call
+CALL getAPG('Reggie Jackson', '2018-2019', @apg);
+
+
+/******** TRIGGERS *************************/
+DROP TRIGGER IF EXISTS player_before_insert;
+
+DELIMITER $$
+
+CREATE TRIGGER player_before_insert
+BEFORE INSERT 
+ON player_list_2016
+FOR EACH ROW 
+BEGIN
+	IF NEW.age < 19 THEN  -- conditions for the trigger
+		SIGNAL SQLSTATE '22003'
+		SET MESSAGE_TEXT = 'Player age is less than minimum age of 19',
+		MYSQL_ERRNO = 1264;
+	ELSEIF NEW.exp != 'R' THEN
+		SIGNAL SQLSTATE '22003'
+		SET MESSAGE_TEXT = 'Player experience is not R for rookie',
+		MYSQL_ERRNO = 1264;
+	ELSEIF LENGTH(NEW.teamAbv) != 3 THEN
+		SIGNAL SQLSTATE '22003'
+		SET MESSAGE_TEXT = 'Team abbreviation is not valid',
+		MYSQL_ERRNO = 1264;
+	END IF;
+    
+END $$
+
+-- Instance that activates the trigger with an invalid age    
+INSERT INTO player_list_2016(playerID, player, teamAbv, exp, age, position)
+VALUES(DEFAULT, 'John Wick', 'MIAI', '1', 19, 'F');
