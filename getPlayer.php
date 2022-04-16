@@ -1,4 +1,7 @@
 <?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 // If the all the variables are set when the Submit button is clicked...
 if (isset($_POST['field_submit'])) {
     // Refer to conn.php file and open a connection.
@@ -38,13 +41,13 @@ try
     <div id="navbar">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="getPlayer.php">Search Rosters</a></li>
-        <li><a href="insertMovie.php">Insert Roster</a></li>
-        <li><a href="deleteMovie.php">Delete Roster</a></li>
+        <li><a href="getPlayer.php">Search Players</a></li>
+        <li><a href="insertPlayer.php">Insert Players</a></li>
+        <li><a href="deletePlayer.php">Delete Players</a></li>
       </ul>
     </div>
     
-    <h1> Search Players By College</h1>
+    <h1> Search Players By School</h1>
     <!-- This is the start of the form. This form has one text field and one button.
       See the project.css file to note how form is stylized.-->
     <form method="post">

@@ -1,4 +1,7 @@
 <?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 if (isset($_POST['f_submit'])) {
 
@@ -41,12 +44,12 @@ if (isset($_POST['f_submit'])) {
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="getPlayer.php">Search Players</a></li>
-        <li><a href="insertMovie.php">Insert Movie</a></li>
-        <li><a href="deleteMovie.php">Delete Movie</a></li>
+        <li><a href="insertPlayer.php">Insert Players</a></li>
+        <li><a href="deletePlayer.php">Delete Players</a></li>
       </ul>
     </div>
 
-<h1> Insert Movie </h1>
+<h1> Insert Player </h1>
 
     <form method="post">
     	<label for="id_mID">mID</label>

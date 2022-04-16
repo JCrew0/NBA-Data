@@ -1,4 +1,7 @@
 <?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 // If the all the variables are set when the Submit button is clicked...
 if (isset($_POST['field_submit'])) {
     // It will refer to conn.php file and will open a connection.
@@ -39,13 +42,13 @@ if (isset($_POST['field_submit'])) {
       <!-- See the project.css file to note how ul (unordered list) is stylized.-->
       <ul>
         <li><a href="index.html">Home</a></li> <!-- LInk to Home page-->
-        <li><a href="getPlayer.php">Search Movie</a></li> <!-- LInk to Search Movie page-->
-        <li><a href="insertMovie.php">Insert Movie</a></li>
-        <li><a href="deleteMovie.php">Delete Movie</a></li>
+        <li><a href="getPlayer.php">Search Players</a></li> <!-- LInk to Search Movie page-->
+        <li><a href="insertPlayer.php">Insert Players</a></li>
+        <li><a href="deletePlayer.php">Delete Players</a></li>
       </ul>
     </div>
     <!-- See the project.css file to note h1 (Heading 1) is stylized.-->
-    <h1> Delete a Movie </h1>
+    <h1> Delete a Player </h1>
     <!-- This is the start of the form. This form has one text field and one button.
       See the project.css file to note how form is stylized.-->
     <form method="post">
