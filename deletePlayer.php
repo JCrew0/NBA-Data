@@ -7,15 +7,15 @@ if (isset($_POST['field_submit'])) {
     // It will refer to conn.php file and will open a connection.
     require_once("conn.php");
     // Will get the value typed in the form text field and save into variable
-    $var_title = $_POST['field_title'];
-    // Save the query into variable called $query. NOte that :title is a place holder
-    $query = "CALL deleteMovie(:title)";
+    $var_name = $_POST['field_name'];
+    // Save the query into variable called $query.
+    $query = "CALL deletePlayer(:name)";
     
     try
     {
       $prepared_stmt = $dbo->prepare($query);
       //bind the value saved in the variable $var_title to the place holder :title after //verifying (using PDO::PARAM_STR) that the user has typed a valid string.
-      $prepared_stmt->bindValue(':title', $var_title, PDO::PARAM_STR);
+      $prepared_stmt->bindValue(':name', $var_name, PDO::PARAM_STR);
       //Execute the query and save the result in variable named $result
       $result = $prepared_stmt->execute();
 
@@ -32,7 +32,7 @@ if (isset($_POST['field_submit'])) {
   <!-- Any thing inside the HEAD tags are not visible on page.-->
   <head>
     <!-- THe following is the stylesheet file. The CSS file decides look and feel -->
-    <link rel="stylesheet" type="text/css" href="project.css" />
+    <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
   </head> 
 
   <!-- Everything inside the BODY tags are visible on page.-->
@@ -53,24 +53,24 @@ if (isset($_POST['field_submit'])) {
       See the project.css file to note how form is stylized.-->
     <form method="post">
 
-      <label for="id_title">Title of movie</label>
+      <label for="id_name">Name of Player</label>
       <!-- The input type is a text field. Note the name and id. The name attribute
         is referred above on line 7. $var_title = $_POST['field_title']; -->
-      <input type="text" name="field_title" id="id_title">
+      <input type="text" name="field_name" id="id_name">
       <!-- The input type is a submit button. Note the name and value. The value attribute decides what will be dispalyed on Button. In this case the button shows Delete Movie.
       The name attribute is referred above on line 3 and line 63. -->
-      <input type="submit" name="field_submit" value="Delete Movie">
+      <input type="submit" name="field_submit" value="Delete Player">
     </form>
 
     <?php
       if (isset($_POST['field_submit'])) {
         if ($result) { 
     ?>
-          Movie was deleted successfully.
+          Player was deleted successfully.
     <?php 
         } else { 
     ?>
-          <h3> Sorry, there was an error. Movie data was not deleted. </h3>
+          <h3> Sorry, there was an error. Player data was not deleted. </h3>
     <?php 
         }
       } 

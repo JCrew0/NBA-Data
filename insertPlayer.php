@@ -36,7 +36,7 @@ if (isset($_POST['f_submit'])) {
 <html>
   <head>
     <!-- THe following is the stylesheet file. The CSS file decides look and feel -->
-    <link rel="stylesheet" type="text/css" href="project.css" />
+    <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
   </head> 
 
   <body>

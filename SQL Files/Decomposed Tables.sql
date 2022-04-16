@@ -199,6 +199,7 @@ CREATE TABLE IF NOT EXISTS player_list_2016(
 	SELECT 
 		rosters.playerID,
         rosters.player,
+        school,
         player_gamelogs.teamAbv,
         exp,
         age,
@@ -219,6 +220,7 @@ CREATE TABLE IF NOT EXISTS player_list_2017(
 	SELECT 
 		rosters.playerID,
         rosters.player,
+        school,
         player_gamelogs.teamAbv,
         exp,
         age,
@@ -239,6 +241,7 @@ CREATE TABLE IF NOT EXISTS player_list_2018(
 	SELECT 
 		rosters.playerID,
         rosters.player,
+        school,
         player_gamelogs.teamAbv,
         exp,
         age,
@@ -259,6 +262,7 @@ CREATE TABLE IF NOT EXISTS player_list_2019(
 	SELECT 
 		rosters.playerID,
         rosters.player,
+        school,
         player_gamelogs.teamAbv,
         exp,
         age,
@@ -279,6 +283,7 @@ CREATE TABLE IF NOT EXISTS player_list_2020(
 	SELECT 
 		rosters.playerID,
         rosters.player,
+        school,
         player_gamelogs.teamAbv,
         exp,
         age,
@@ -291,3 +296,33 @@ CREATE TABLE IF NOT EXISTS player_list_2020(
 
 ALTER TABLE player_list_2020
 ADD PRIMARY KEY (playerID);
+
+SELECT *
+FROM player_2016_stats;
+
+SELECT *
+FROM player_list_2016;
+
+SELECT *
+FROM player_2017_stats;
+
+SELECT *
+FROM player_list_2017;
+
+SELECT *
+FROM player_2018_stats;
+
+SELECT *
+FROM player_list_2018;
+
+SELECT *
+FROM player_2019_stats;
+
+SELECT *
+FROM player_list_2019;
+
+SELECT *
+FROM player_2020_stats;
+
+SELECT *
+FROM player_list_2020;

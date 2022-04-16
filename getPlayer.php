@@ -8,7 +8,7 @@ if (isset($_POST['field_submit'])) {
     require_once("conn.php");
     // Will get the value typed in the form text field and save into variable
     $var_school = $_POST['field_school'];
-    // Save the query into variable called $query. Note that :ph_director is a place holder
+    // Save the query into variable called $query.
     $query = "SELECT * FROM rosters WHERE school = :ph_school";
 
 try
@@ -34,7 +34,7 @@ try
 <!-- Any thing inside the HEAD tags are not visible on page.-->
   <head>
     <!-- THe following is the stylesheet file. The CSS file decides look and feel -->
-    <link rel="stylesheet" type="text/css" href="project.css" />
+    <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
   </head> 
 <!-- Everything inside the BODY tags are visible on page.-->
   <body>
