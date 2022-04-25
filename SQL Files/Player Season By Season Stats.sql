@@ -34,7 +34,10 @@ CREATE TABLE IF NOT EXISTS player_2016_stats(
 	WHERE rosters.season = 2016 AND player_gamelogs.seasonYear = '2016-17'
 	GROUP BY rosters.playerID
 	);
-    
+
+ALTER TABLE player_2016_stats
+MODIFY playerID BIGINT NOT NULL;
+
 ALTER TABLE player_2016_stats
 ADD PRIMARY KEY (playerID);
 
@@ -78,6 +81,9 @@ CREATE TABLE IF NOT EXISTS player_2017_stats(
 	WHERE rosters.season = 2017 AND player_gamelogs.seasonYear = '2017-18'
 	GROUP BY rosters.playerID
 	);
+
+ALTER TABLE player_2017_stats
+MODIFY playerID BIGINT NOT NULL;
     
 ALTER TABLE player_2017_stats
 ADD PRIMARY KEY (playerID);
@@ -124,6 +130,9 @@ CREATE TABLE IF NOT EXISTS player_2018_stats(
 	);
     
 ALTER TABLE player_2018_stats
+MODIFY playerID BIGINT NOT NULL;
+    
+ALTER TABLE player_2018_stats
 ADD PRIMARY KEY (playerID);
 
 ALTER TABLE player_2018_stats
@@ -166,6 +175,9 @@ CREATE TABLE IF NOT EXISTS player_2019_stats(
 	WHERE rosters.season = 2019 AND player_gamelogs.seasonYear = '2019-20'
 	GROUP BY rosters.playerID
 	);
+
+ALTER TABLE player_2019_stats
+MODIFY playerID BIGINT NOT NULL;
     
 ALTER TABLE player_2019_stats
 ADD PRIMARY KEY (playerID);
@@ -210,7 +222,9 @@ CREATE TABLE IF NOT EXISTS player_2020_stats(
 	WHERE rosters.season = 2020 AND player_gamelogs.seasonYear = '2020-21'
 	GROUP BY rosters.playerID
 	);
-    
+
+ALTER TABLE player_2020_stats
+MODIFY playerID BIGINT NOT NULL;
 
 ALTER TABLE player_2020_stats
 ADD PRIMARY KEY (playerID);

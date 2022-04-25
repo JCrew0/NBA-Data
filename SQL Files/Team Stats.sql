@@ -26,7 +26,10 @@ CREATE TABLE IF NOT EXISTS team_2016_stats (
 	FROM games
     WHERE seasonID = 22016
 	GROUP BY games.teamName);
-    
+
+ALTER TABLE team_2016_stats
+MODIFY teamID BIGINT NOT NULL;
+
 ALTER TABLE team_2016_stats
 ADD PRIMARY KEY (teamID);
 
@@ -58,7 +61,10 @@ CREATE TABLE IF NOT EXISTS team_2017_stats (
 	FROM games
     WHERE seasonID = 22017
 	GROUP BY games.teamName);
-    
+
+ALTER TABLE team_2017_stats
+MODIFY teamID BIGINT NOT NULL;
+
 ALTER TABLE team_2017_stats
 ADD PRIMARY KEY (teamID);
 
@@ -90,7 +96,10 @@ CREATE TABLE IF NOT EXISTS team_2018_stats (
 	FROM games
     WHERE seasonID = 22018
 	GROUP BY games.teamName);
-    
+
+ALTER TABLE team_2018_stats
+MODIFY teamID BIGINT NOT NULL;
+
 ALTER TABLE team_2018_stats
 ADD PRIMARY KEY (teamID);
 
@@ -122,7 +131,10 @@ CREATE TABLE IF NOT EXISTS team_2019_stats (
 	FROM games
     WHERE seasonID = 22019
 	GROUP BY games.teamName);
-    
+
+ALTER TABLE team_2019_stats
+MODIFY teamID BIGINT NOT NULL;
+
 ALTER TABLE team_2019_stats
 ADD PRIMARY KEY (teamID);
 
@@ -155,25 +167,11 @@ CREATE TABLE IF NOT EXISTS team_2020_stats (
 	FROM games
     WHERE seasonID = 22020
 	GROUP BY games.teamName);
+
+ALTER TABLE team_2020_stats
+MODIFY teamID BIGINT NOT NULL;
     
 ALTER TABLE team_2020_stats
 ADD PRIMARY KEY (teamID);
 
 
-
-
-
-SELECT *
-FROM team_2016_stats;
-
-SELECT *
-FROM team_2017_stats;
-
-SELECT *
-FROM team_2018_stats;
-
-SELECT * 
-FROM team_2019_stats;
-
-SELECT *
-FROM team_2020_stats;

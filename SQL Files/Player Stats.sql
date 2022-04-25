@@ -178,32 +178,3 @@ SELECT @apg;
 CALL getAPG('Reggie Jackson', '2018-2019', @apg);
 
 
-/******** TRIGGERS *************************/
-DROP TRIGGER IF EXISTS player_before_insert;
-
-DELIMITER $$
-
-CREATE TRIGGER player_before_insert
-BEFORE INSERT 
-ON player_list_2016
-FOR EACH ROW 
-BEGIN
-	IF NEW.age < 19 THEN  -- conditions for the trigger
-		SIGNAL SQLSTATE '22003'
-		SET MESSAGE_TEXT = 'Player age is less than minimum age of 19',
-		MYSQL_ERRNO = 1264;
-	ELSEIF NEW.exp != 'R' THEN
-		SIGNAL SQLSTATE '22003'
-		SET MESSAGE_TEXT = 'Player experience is not R for rookie',
-		MYSQL_ERRNO = 1264;
-	ELSEIF LENGTH(NEW.teamAbv) != 3 THEN
-		SIGNAL SQLSTATE '22003'
-		SET MESSAGE_TEXT = 'Team abbreviation is not valid',
-		MYSQL_ERRNO = 1264;
-	END IF;
-    
-END $$
-
--- Instance that activates the trigger with an invalid age    
-INSERT INTO player_list_2016(playerID, player, teamAbv, exp, age, position)
-VALUES(DEFAULT, 'John Wick', 'MIAI', '1', 19, 'F');
