@@ -28,6 +28,30 @@ END//
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS updatePlayer;
+
+DELIMITER //
+
+CREATE PROCEDURE updatePlayer(IN playerName VARCHAR(100), playerNum INT, IN pos VARCHAR(50), IN playerSchool VARCHAR(50), playerHeight VARCHAR(5), playerWeight INT)
+BEGIN
+	IF playerName != '' THEN 
+		UPDATE rosters
+		SET num = playerNum, position = pos, school = playerSchool, height = playerHeight, weight = playerWeight
+		WHERE player = playerName;
+	ELSE 
+		SIGNAL SQLSTATE '22003'
+		SET MESSAGE_TEXT = 'Player name should be populated',
+		MYSQL_ERRNO = 1264;
+	END IF;
+END //
+DELIMITER ;
+
+CALL updatePlayer('Darius Garland', 2, '', 'Vanderbilt', '', 180);
+SELECT * 
+FROM rosters
+WHERE player = 'Darius Garland';
+			
+
 /**** TRIGGERS *****************************************/
 
 DROP TRIGGER IF EXISTS player_before_insert;
@@ -55,7 +79,29 @@ BEGIN
     
 END $$
 DELIMITER ; 
- 
+
+
+
+DROP TRIGGER IF EXISTS player_before_update;
+
+DELIMITER $$
+
+-- this trigger is meant to keep empty values populated with the old values
+CREATE TRIGGER player_before_update
+BEFORE UPDATE
+ON rosters
+FOR EACH ROW 
+BEGIN 
+	IF NEW.position = '' THEN 
+		SET NEW.position = OLD.position;
+	END IF ;
+	
+    IF NEW.height = '' THEN 
+		SET NEW.height = OLD.height;
+	END IF;
+    
+END $$
+DELIMITER ;
 
 
     
