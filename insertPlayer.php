@@ -5,82 +5,95 @@ header("Pragma: no-cache");
 
 if (isset($_POST['f_submit'])) {
 
-    require_once("conn.php");
+  require_once("conn.php");
 
-    $var_mID = $_POST['f_mID'];
-    $var_title = $_POST['f_title'];
-    $var_year = $_POST['f_year'];
-    $var_director = $_POST['f_director'];
+  $var_name = $_POST['field_name'];
+  $var_num = $_POST['field_num'];
+  $var_position = $_POST['field_position'];
+  $var_season = $_POST['field_season'];
 
-    $query = "INSERT INTO Movie (mID, title, movieYear, director) "
-            . "VALUES (:mID, :title, :year, :director)";
+  $query = "CALL insertPlayer(:name, :season, :num, :position)";
 
-    try
-    {
-      $prepared_stmt = $dbo->prepare($query);
-      $prepared_stmt->bindValue(':mID', $var_mID, PDO::PARAM_INT);
-      $prepared_stmt->bindValue(':title', $var_title, PDO::PARAM_STR);
-      $prepared_stmt->bindValue(':year', $var_year, PDO::PARAM_INT);
-      $prepared_stmt->bindValue(':director', $var_director, PDO::PARAM_STR);
-      $result = $prepared_stmt->execute();
-
-    }
-    catch (PDOException $ex)
-    { // Error in database processing.
-      echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
-    }
+  try {
+    $prepared_stmt = $dbo->prepare($query);
+    $prepared_stmt->bindValue(':name', $var_name, PDO::PARAM_STR);
+    $prepared_stmt->bindValue(':season', $var_season, PDO::PARAM_STR);
+    $prepared_stmt->bindValue(':num', $var_num, PDO::PARAM_STR);
+    $prepared_stmt->bindValue(':position', $var_position, PDO::PARAM_STR);
+    $result = $prepared_stmt->execute();
+  } catch (PDOException $ex) { // Error in database processing.
+    echo $sql . "<br>" . $error->getMessage(); // HTTP 500 - Internal Server Error
+  }
 }
 
 ?>
 
 <html>
-  <head>
+
+<head>
     <!-- THe following is the stylesheet file. The CSS file decides look and feel -->
     <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
-  </head> 
+</head>
 
-  <body>
-    <div id="navbar">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="getPlayer.php">Search Players</a></li>
-        <li><a href="insertPlayer.php">Insert Players</a></li>
-        <li><a href="deletePlayer.php">Delete Players</a></li>
-      </ul>
+<body>
+    <div id="container">
+        <div id="navbar">
+            <img src="NBA.jpg" alt="NBA Logo">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="getPlayer.php">Search Players</a></li>
+                <li><a href="sortPlayer.php">Sort Players</a></li>
+                <li><a href="insertPlayer.php">Create Players</a></li>
+                <li><a href="deletePlayer.php">Delete Players</a></li>
+                <li><a href="updatePlayer.php">Update Players</a></li>
+            </ul>
+        </div>
+
+        <h1> Create a new free agent! </h1>
+        <div id="input_container">
+            <form method="post">
+                <b>
+                    <label for="id_name">Name:</label>
+                </b>
+                <input type="text" name="field_name" id="id_name">
+
+                <b>
+                    <label for="id_num">Number:</label>
+                </b>
+                <input type="text" name="field_num" id="id_num">
+
+                <b>
+                    <label for="id_position">Position:</label>
+                    <b>
+                        <input type="text" name="field_position" id="id_position">
+
+                        <select name="field_season" id="id_season">
+                            <option value="2016" selected>2016</option>
+                            <option value="2017" selected>2017</option>
+                            <option value="2018" selected>2018</option>
+                            <option value="2019" selected>2019</option>
+                            <option value="2020" selected>2020</option>
+                        </select>
+
+                        <input type="submit" name="f_submit" value="Submit">
+            </form>
+            <br>
+        </div>
+        <?php
+    if (isset($_POST['f_submit'])) {
+      if ($result) {
+    ?>
+        New player was successfully created.
+        <?php
+      } else {
+      ?>
+        <h3> Sorry, there was an error. Player data was not inserted. </h3>
+        <?php
+      }
+    }
+    ?>
+        <br>
     </div>
+</body>
 
-<h1> Insert Player </h1>
-
-    <form method="post">
-    	<label for="id_mID">mID</label>
-    	<input type="text" name="f_mID" id="id_mID"> 
-
-    	<label for="id_title">title</label>
-    	<input type="text" name="f_title" id="id_title">
-
-    	<label for="id_year">year</label>
-    	<input type="text" name="f_year" id="id_year">
-
-    	<label for="id_director">director</label>
-    	<input type="text" name="f_director" id="id_director">
-    	
-    	<input type="submit" name="f_submit" value="Submit">
-    </form>
-    <?php
-      if (isset($_POST['f_submit'])) {
-        if ($result) { 
-    ?>
-          Movie data was inserted successfully.
-    <?php 
-        } else { 
-    ?>
-          <h3> Sorry, there was an error. Movie data was not inserted. </h3>
-    <?php 
-        }
-      } 
-    ?>
-
-
-    
-  </body>
 </html>

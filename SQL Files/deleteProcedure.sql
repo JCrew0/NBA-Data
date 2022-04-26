@@ -1,4 +1,5 @@
 USE project_two;
+SET SQL_SAFE_UPDATES=0;
 
 DROP PROCEDURE IF EXISTS deletePlayer;
 
@@ -21,9 +22,10 @@ DELIMITER //
 CREATE PROCEDURE insertPlayer(IN playerName VARCHAR(100), IN seasonYear INT, 
 	IN playerNum INT, IN pos VARCHAR(5))
 BEGIN 
-	INSERT INTO rosters(tempID, season, leagueID, player, num, position, exp, playerID)
-    VALUES(DEFAULT, seasonYear, 0, playerName, playerNum, pos, 'R', DEFAULT);
-    
+	INSERT INTO rosters(tempID, teamID, season, leagueID, player, num, position, exp, playerID)
+    VALUES(DEFAULT, 99999, seasonYear, 0, playerName, playerNum, pos, 'R', DEFAULT);
+    INSERT INTO games(teamID, teamName)
+    VALUES(99999, "Free Agent");
 END// 
 DELIMITER ;
 
@@ -46,10 +48,10 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL updatePlayer('Darius Garland', 2, '', 'Vanderbilt', '', 180);
+/**CALL updatePlayer('Darius Garland', 2, '', 'Vanderbilt', '', 180);
 SELECT * 
 FROM rosters
-WHERE player = 'Darius Garland';
+WHERE player = 'Darius Garland';**/
 			
 
 /**** TRIGGERS *****************************************/
@@ -92,12 +94,24 @@ BEFORE UPDATE
 ON rosters
 FOR EACH ROW 
 BEGIN 
-	IF NEW.position = '' THEN 
+	IF NEW.num = -69 THEN 
+		SET NEW.num = OLD.num;
+	END IF;
+    
+    IF NEW.position = '' THEN 
 		SET NEW.position = OLD.position;
+	END IF ;
+    
+    IF NEW.school = '' THEN 
+		SET NEW.school = OLD.school;
 	END IF ;
 	
     IF NEW.height = '' THEN 
 		SET NEW.height = OLD.height;
+	END IF;
+    
+    IF NEW.weight = -69 THEN 
+		SET NEW.weight = OLD.weight;
 	END IF;
     
 END $$

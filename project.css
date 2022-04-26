@@ -5,7 +5,7 @@ body{
 
 div#navbar {
  height: 40px;
- width: 600px;
+ width: 950px;
  background-repeat:repeat-x;
  background:#17408B;
 }
@@ -13,8 +13,9 @@ div#navbar {
 div#navbar ul {
 	line-height: 40px;	
 	font-size: 24px;
-	margin: 0px;
+	margin: 5px;
  	padding: 0px;
+	float: left;
 }
 
 div#navbar li {
@@ -36,6 +37,18 @@ div#navbar li a:hover{
 label {
   display: block;
   margin: 5px 0;
+  float: left;
+  padding-left: 5px;
+  padding-right: 3px;
+}
+
+input {
+	float: left;
+	padding-right: 2px;
+}
+
+select {
+	float: left;
 }
 
 table {
@@ -59,10 +72,30 @@ h3{
 }
 
 footer{
-	width:600px;
+	width:950px;
 	border-top: dotted 1px;
 }
 
 p{
-	width: 600px;
+	width: 950px;
+}
+
+img {
+	width: 37px;
+	height: 40px;
+	float: left;
+}
+
+#input_container {
+	border: 3px;
+	border-color: black;
+	border-style: solid;
+	width: 944px;
+}
+
+#container {
+	border: 3px;
+	border-color: black;
+	border-style: solid;
+	width: 950px;
 }
