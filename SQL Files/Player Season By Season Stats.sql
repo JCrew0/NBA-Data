@@ -44,7 +44,6 @@ ADD PRIMARY KEY (playerID);
 ALTER TABLE player_2016_stats
 ADD FOREIGN KEY (teamID) REFERENCES team_2016_stats(teamID);
 
-
 -- 2017-2018
 DROP TABLE IF EXISTS player_2017_stats;
 CREATE TABLE IF NOT EXISTS player_2017_stats(
@@ -90,7 +89,6 @@ ADD PRIMARY KEY (playerID);
 
 ALTER TABLE player_2017_stats
 ADD FOREIGN KEY (teamID) REFERENCES team_2017_stats(teamID);
-
 
 -- 2018-19
 DROP TABLE IF EXISTS player_2018_stats;
@@ -138,7 +136,6 @@ ADD PRIMARY KEY (playerID);
 ALTER TABLE player_2018_stats
 ADD FOREIGN KEY (teamID) REFERENCES team_2018_stats(teamID);
 
-
 -- 2019-20
 DROP TABLE IF EXISTS player_2019_stats;
 CREATE TABLE IF NOT EXISTS player_2019_stats(
@@ -184,7 +181,6 @@ ADD PRIMARY KEY (playerID);
 
 ALTER TABLE player_2019_stats
 ADD FOREIGN KEY (teamID) REFERENCES team_2019_stats(teamID);
-
 
 -- 2020- 21
 DROP TABLE IF EXISTS player_2020_stats;

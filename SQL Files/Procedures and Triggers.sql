@@ -1,6 +1,7 @@
 USE project_two;
 SET SQL_SAFE_UPDATES=0;
 
+-- Creating the procedure to delete players
 DROP PROCEDURE IF EXISTS deletePlayer;
 
 DELIMITER //
@@ -15,7 +16,7 @@ END//
 
 DELIMITER ;
 
-
+-- creating the procedure to insert players
 DROP PROCEDURE IF EXISTS insertPlayer;
 DELIMITER //
 
@@ -29,7 +30,7 @@ BEGIN
 END// 
 DELIMITER ;
 
-
+-- creating the procedure to update players
 DROP PROCEDURE IF EXISTS updatePlayer;
 
 DELIMITER //
@@ -56,6 +57,7 @@ WHERE player = 'Darius Garland';**/
 
 /**** TRIGGERS *****************************************/
 
+-- trigger to perform necessary checks on player before inserting
 DROP TRIGGER IF EXISTS player_before_insert;
 
 DELIMITER $$
@@ -82,19 +84,17 @@ BEGIN
 END $$
 DELIMITER ; 
 
-
-
+-- trigger to set appropriate emtpy fields to previous value before update
 DROP TRIGGER IF EXISTS player_before_update;
 
 DELIMITER $$
 
--- this trigger is meant to keep empty values populated with the old values
 CREATE TRIGGER player_before_update
 BEFORE UPDATE
 ON rosters
 FOR EACH ROW 
 BEGIN 
-	IF NEW.num = -69 THEN 
+	IF NEW.num = -99 THEN 
 		SET NEW.num = OLD.num;
 	END IF;
     
@@ -110,12 +110,9 @@ BEGIN
 		SET NEW.height = OLD.height;
 	END IF;
     
-    IF NEW.weight = -69 THEN 
+    IF NEW.weight = -99 THEN 
 		SET NEW.weight = OLD.weight;
 	END IF;
     
 END $$
 DELIMITER ;
-
-
-    

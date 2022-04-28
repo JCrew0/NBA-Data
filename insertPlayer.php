@@ -7,14 +7,17 @@ if (isset($_POST['f_submit'])) {
 
   require_once("conn.php");
 
+  //Linking variable names to fields
   $var_name = $_POST['field_name'];
   $var_num = $_POST['field_num'];
   $var_position = $_POST['field_position'];
   $var_season = $_POST['field_season'];
 
+  //Saving the SQL query
   $query = "CALL insertPlayer(:name, :season, :num, :position)";
 
   try {
+    //Attempting to execute the query
     $prepared_stmt = $dbo->prepare($query);
     $prepared_stmt->bindValue(':name', $var_name, PDO::PARAM_STR);
     $prepared_stmt->bindValue(':season', $var_season, PDO::PARAM_STR);
@@ -31,69 +34,75 @@ if (isset($_POST['f_submit'])) {
 <html>
 
 <head>
-    <!-- THe following is the stylesheet file. The CSS file decides look and feel -->
-    <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
+  <title>NBA Data</title>
+  <link rel="icon" type="image/x-icon" href="nba.ico">
+  <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
 </head>
 
 <body>
-    <div id="container">
-        <div id="navbar">
-            <img src="NBA.jpg" alt="NBA Logo">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="getPlayer.php">Search Players</a></li>
-                <li><a href="sortPlayer.php">Sort Players</a></li>
-                <li><a href="insertPlayer.php">Create Players</a></li>
-                <li><a href="deletePlayer.php">Delete Players</a></li>
-                <li><a href="updatePlayer.php">Update Players</a></li>
-            </ul>
-        </div>
+  <div id="container">
+    <div id="navbar">
+      <img src="NBA.jpg" alt="NBA Logo">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="getPlayer.php">Search Players</a></li>
+        <li><a href="sortPlayer.php">Sort Players</a></li>
+        <li><a href="insertPlayer.php">Create Players</a></li>
+        <li><a href="deletePlayer.php">Delete Players</a></li>
+        <li><a href="updatePlayer.php">Update Players</a></li>
+      </ul>
+    </div>
 
-        <h1> Create a new free agent! </h1>
-        <div id="input_container">
-            <form method="post">
-                <b>
-                    <label for="id_name">Name:</label>
-                </b>
-                <input type="text" name="field_name" id="id_name">
+    <h1> Create a new free agent! </h1>
+    <div id="input_container">
+      <form method="post">
+        <b>
+          <label for="id_name">Name:</label>
+        </b>
+        <input type="text" name="field_name" id="id_name">
 
-                <b>
-                    <label for="id_num">Number:</label>
-                </b>
-                <input type="text" name="field_num" id="id_num">
+        <b>
+          <label for="id_num">Number:</label>
+        </b>
+        <input type="text" name="field_num" id="id_num">
 
-                <b>
-                    <label for="id_position">Position:</label>
-                    <b>
-                        <input type="text" name="field_position" id="id_position">
+        <b>
+          <label for="id_position">Position:</label>
+          <b>
+            <input type="text" name="field_position" id="id_position">
 
-                        <select name="field_season" id="id_season">
-                            <option value="2016" selected>2016</option>
-                            <option value="2017" selected>2017</option>
-                            <option value="2018" selected>2018</option>
-                            <option value="2019" selected>2019</option>
-                            <option value="2020" selected>2020</option>
-                        </select>
+            <b>
+              <label for="id_season">Season:</label>
+            </b>
+            <select name="field_season" id="id_season">
+              <option value="2016" selected>2016</option>
+              <option value="2017" selected>2017</option>
+              <option value="2018" selected>2018</option>
+              <option value="2019" selected>2019</option>
+              <option value="2020" selected>2020</option>
+            </select>
 
-                        <input type="submit" name="f_submit" value="Submit">
-            </form>
-            <br>
-        </div>
-        <?php
+            <div id="submit_container">
+              <input type="submit" id="submit" name="f_submit" value="Submit">
+            </div>
+      </form>
+      <br>
+    </div>
+    <?php
     if (isset($_POST['f_submit'])) {
       if ($result) {
     ?>
         New player was successfully created.
-        <?php
+      <?php
       } else {
       ?>
         <h3> Sorry, there was an error. Player data was not inserted. </h3>
-        <?php
+    <?php
       }
     }
     ?>
-        <br>
-    </div>
+    <br>
+  </div>
 </body>
 
 </html>

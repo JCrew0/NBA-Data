@@ -47,6 +47,36 @@ input {
 	padding-right: 2px;
 }
 
+#id_weight {
+	width: 90px;
+}
+
+#id_height {
+	width: 90px;
+}
+
+#id_position {
+	width: 90px;
+}
+
+#id_num {
+	width: 90px;
+}
+
+#submit_container {
+	float: left;
+	padding-left: 5px;
+}
+
+#select_container{
+	float:left;
+	padding-left: 5px;
+}
+
+#submit {
+	padding-right: 6px;
+}
+
 select {
 	float: left;
 }
@@ -56,9 +86,29 @@ table {
   border-spacing: 0;
 }
 
-td, th {
-  padding: 5px 30px 5px 30px;
-  border-bottom: 1px solid #aaa;
+#td1, #th1 {
+	padding: 5px 19px 5px 19px;
+  	border-bottom: 1px solid #aaa;
+}
+
+#td2 {
+	padding: 5px 110px 5px 110px;
+  	border-bottom: 1px solid #aaa;
+}
+
+#th2 {
+	padding: 5px 70px 5px 70px;
+  	border-bottom: 1px solid #aaa;
+}
+
+#td3 {
+	padding: 5px 15px 5px 15px;
+  	border-bottom: 1px solid #aaa;
+}
+
+#th3 {
+	padding: 5px 15px 5px 15px;
+  	border-bottom: 1px solid #aaa;
 }
 
 h1{
@@ -84,6 +134,13 @@ img {
 	width: 37px;
 	height: 40px;
 	float: left;
+}
+
+#kawhi {
+	width: 950px;
+	height: 400px;
+	margin-right: 900px;
+	margin-top: 15px;
 }
 
 #input_container {

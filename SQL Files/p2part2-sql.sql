@@ -1,9 +1,11 @@
 SET GLOBAL local_infile=1; /*Needed to remove errors on Windows */
-
+-- DATA SET AT: https://www.kaggle.com/datasets/lukegeorge/nba-data-20172021?select=shotchart_2017.csv
+-- Drop database
 DROP DATABASE IF EXISTS project_two;
 CREATE DATABASE project_two; 
 USE project_two;
 
+-- Creating the rosters table
 DROP TABLE IF EXISTS rosters;
 CREATE TABLE IF NOT EXISTS rosters (
 	tempID BIGINT,
@@ -23,6 +25,7 @@ CREATE TABLE IF NOT EXISTS rosters (
     playerID BIGINT
 );
 
+-- loading the rosters table
 LOAD DATA
     LOCAL INFILE 'C:/Users/justi/OneDrive/Documents/College/Senior Year/Spring/CS 3265/Project 2/rosters_2017.csv'
     INTO TABLE rosters
@@ -63,7 +66,7 @@ LOAD DATA
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES;
 
--- shotcharts
+-- Creating the shotchart table
 DROP TABLE IF EXISTS shotchart;
 CREATE TABLE IF NOT EXISTS shotchart(
 		tempID INT, 
@@ -93,6 +96,7 @@ CREATE TABLE IF NOT EXISTS shotchart(
         visitingTeam VARCHAR(10)
 	);
     
+    -- loading the shotchart table
     LOAD DATA
     LOCAL INFILE 'C:/Users/justi/OneDrive/Documents/College/Senior Year/Spring/CS 3265/Project 2/shotchart_2017.csv'
     INTO TABLE shotchart
@@ -133,6 +137,7 @@ CREATE TABLE IF NOT EXISTS shotchart(
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES;
     
+-- creating the player_gamelogs table    
 DROP TABLE IF EXISTS player_gamelogs;
 CREATE TABLE IF NOT EXISTS player_gamelogs (
 		tempID INT,
@@ -202,6 +207,7 @@ CREATE TABLE IF NOT EXISTS player_gamelogs (
         tripleDoubleRank INT
 ) 	ENGINE = INNODB;
 
+-- loading the player_gamelogs table
 LOAD DATA
     LOCAL INFILE 'C:/Users/justi/OneDrive/Documents/College/Senior Year/Spring/CS 3265/Project 2/player_gamelogs_2017.csv'
     INTO TABLE player_gamelogs
@@ -242,6 +248,7 @@ LOAD DATA
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES;
 
+-- creating the play_by_play table
 DROP TABLE IF EXISTS play_by_play;
 CREATE TABLE IF NOT EXISTS play_by_play (
 		tempID INT, 
@@ -259,6 +266,7 @@ CREATE TABLE IF NOT EXISTS play_by_play (
         scoreMargin INT
 )	ENGINE = INNODB;
 
+-- loading the play_by_play table
 LOAD DATA
     LOCAL INFILE 'C:/Users/justi/OneDrive/Documents/College/Senior Year/Spring/CS 3265/Project 2/play_by_play_2017.csv'
     INTO TABLE play_by_play
@@ -298,7 +306,8 @@ LOAD DATA
     OPTIONALLY ENCLOSED BY '"'
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES;
-        
+
+-- creating the games table        
 DROP TABLE IF EXISTS games;
 CREATE TABLE IF NOT EXISTS games(
 		tempID INT,
@@ -332,6 +341,7 @@ CREATE TABLE IF NOT EXISTS games(
         plusMinus INT
 ) ENGINE = INNODB;
 
+-- loading the games table
 LOAD DATA
     LOCAL INFILE 'C:/Users/justi/OneDrive/Documents/College/Senior Year/Spring/CS 3265/Project 2/games_2017.csv'
     INTO TABLE games
@@ -372,6 +382,7 @@ LOAD DATA
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES;
 
+-- Testing all of our loads
 SELECT * 
 FROM games
 LIMIT 100;

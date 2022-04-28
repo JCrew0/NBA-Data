@@ -20,14 +20,13 @@ if (isset($_POST['field_submit_change'])) {
   try {
     // Create a prepared statement. Prepared statements are a way to eliminate SQL INJECTION.
     $prepared_stmt1 = $dbo->prepare($query);
-    //bind the value saved in the variable $var_director to the place holder :ph_director  
+    //bind the value saved in the variables to the place holders
     // Use PDO::PARAM_STR to sanitize user string.
     $prepared_stmt1->bindValue(':name', $var_name, PDO::PARAM_STR);
     if ($var_num != "") {
       $prepared_stmt1->bindValue(':num', $var_num, PDO::PARAM_STR);
-    }
-    else {
-      $prepared_stmt1->bindValue(':num', -69, PDO::PARAM_STR);
+    } else {
+      $prepared_stmt1->bindValue(':num', -99, PDO::PARAM_STR);
     }
     $prepared_stmt1->bindValue(':position', $var_position, PDO::PARAM_STR);
     $prepared_stmt1->bindValue(':school', $var_school, PDO::PARAM_STR);
@@ -35,9 +34,8 @@ if (isset($_POST['field_submit_change'])) {
     $prepared_stmt1->bindValue(':name', $var_name, PDO::PARAM_STR);
     if ($var_weight != "") {
       $prepared_stmt1->bindValue(':weight', $var_weight, PDO::PARAM_STR);
-    }
-    else {
-      $prepared_stmt1->bindValue(':weight', -69, PDO::PARAM_STR);
+    } else {
+      $prepared_stmt1->bindValue(':weight', -99, PDO::PARAM_STR);
     }
     $prepared_stmt1->execute();
     // Fetch all the values based on query and save that to variable $result
@@ -75,7 +73,7 @@ if (isset($_POST['field_submit'])) {
   try {
     // Create a prepared statement. Prepared statements are a way to eliminate SQL INJECTION.
     $prepared_stmt = $dbo->prepare($query);
-    //bind the value saved in the variable $var_director to the place holder :ph_director  
+    //bind the value saved in the variables to the place holders
     // Use PDO::PARAM_STR to sanitize user string.
     if ($var_name != "") {
       $prepared_stmt->bindValue(':ph_name', $var_name, PDO::PARAM_STR);
@@ -97,124 +95,123 @@ if (isset($_POST['field_submit'])) {
 ?>
 
 <html>
-<!-- Any thing inside the HEAD tags are not visible on page.-->
 
 <head>
-    <!-- THe following is the stylesheet file. The CSS file decides look and feel -->
-    <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
+  <title>NBA Data</title>
+  <link rel="icon" type="image/x-icon" href="nba.ico">
+  <link rel="stylesheet" type="text/css" href="project.css?id=1234" />
 </head>
-<!-- Everything inside the BODY tags are visible on page.-->
 
 <body>
-    <div id="container">
-        <div id="navbar">
-            <img src="NBA.jpg" alt="NBA Logo">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="getPlayer.php">Search Players</a></li>
-                <li><a href="sortPlayer.php">Sort Players</a></li>
-                <li><a href="insertPlayer.php">Create Players</a></li>
-                <li><a href="deletePlayer.php">Delete Players</a></li>
-                <li><a href="updatePlayer.php">Update Players</a></li>
-            </ul>
-        </div>
+  <div id="container">
+    <div id="navbar">
+      <img src="NBA.jpg" alt="NBA Logo">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="getPlayer.php">Search Players</a></li>
+        <li><a href="sortPlayer.php">Sort Players</a></li>
+        <li><a href="insertPlayer.php">Create Players</a></li>
+        <li><a href="deletePlayer.php">Delete Players</a></li>
+        <li><a href="updatePlayer.php">Update Players</a></li>
+      </ul>
+    </div>
 
-        <h1> Update any players!</h1>
-        <!-- This is the start of the form. This form has one text field and one button.
-      See the project.css file to note how form is stylized.-->
-        <div id="input_container">
-            <form method="post">
+    <h1> Update any players!</h1>
+    <div id="input_container">
+      <form method="post">
 
-                <b>
-                    <label for="id_name">Name:</label>
-                </b>
-                <input type="text" name="field_name" id="id_name">
+        <b>
+          <label for="id_name">Name:</label>
+        </b>
+        <input type="text" name="field_name" id="id_name">
 
-                <b>
-                    <label for="id_team">Team:</label>
-                </b>
-                <input type="text" name="field_team" id="id_team">
+        <b>
+          <label for="id_team">Team:</label>
+        </b>
+        <input type="text" name="field_team" id="id_team">
 
-                <b>
-                    <label for="id_school">School:</label>
-                    <b>
-                        <input type="text" name="field_school" id="id_school">
+        <b>
+          <label for="id_school">School:</label>
+          <b>
+            <input type="text" name="field_school" id="id_school">
 
-                        <select name="field_season" id="id_season">
-                            <option value="2016" selected>2016</option>
-                            <option value="2017" selected>2017</option>
-                            <option value="2018" selected>2018</option>
-                            <option value="2019" selected>2019</option>
-                            <option value="2020" selected>2020</option>
-                        </select>
+            <b>
+              <label for="id_season">Season:</label>
+            </b>
+            <select name="field_season" id="id_season">
+              <option value="2016" selected>2016</option>
+              <option value="2017" selected>2017</option>
+              <option value="2018" selected>2018</option>
+              <option value="2019" selected>2019</option>
+              <option value="2020" selected>2020</option>
+            </select>
 
-                        <div id="submit_container">
-                            <input type="submit" id="submit" name="field_submit" value="Submit">
-                        </div>
-            </form>
-            <br>
-        </div>
+            <div id="submit_container">
+              <input type="submit" id="submit" name="field_submit" value="Submit">
+            </div>
+      </form>
+      <br>
+    </div>
 
-        <?php
+    <?php
     if (isset($_POST['field_submit'])) {
       // If the query executed (result is true) and the row count returned from the query is greater than 0 then...
       if ($result && $prepared_stmt->rowCount() > 0) { ?>
         <!-- first show the header RESULT -->
         <h2>Results for selected season:</h2>
-        <!-- THen create a table like structure. See the project.css how table is stylized. -->
+        <!-- THen create a table like structure. -->
         <table>
-            <!-- Create the first row of table as table head (thead). -->
-            <thead>
-                <!-- The top row is table head with four columns named -- ID, Title ... -->
-                <tr>
-                    <th>Player Name</th>
-                    <th>Number</th>
-                    <th>Position</th>
-                    <th>School</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Submit Edits</th>
-                </tr>
-            </thead>
-            <!-- Create rest of the the body of the table -->
-            <tbody>
-                <!-- For each row saved in the $result variable ... -->
-                <?php foreach ($result as $row) { ?>
+          <!-- Create the first row of table as table head (thead). -->
+          <thead>
+            <!-- The top row is table head with four columns named -->
+            <tr>
+              <th id="th3">Player Name</th>
+              <th id="th3">Number</th>
+              <th id="th3">Position</th>
+              <th id="th3">School</th>
+              <th id="th3">Height</th>
+              <th id="th3">Weight</th>
+              <th id="th3">Submit Edits</th>
+            </tr>
+          </thead>
+          <!-- Create rest of the the body of the table -->
+          <tbody>
+            <!-- For each row saved in the $result variable ... -->
+            <?php foreach ($result as $row) { ?>
 
-                <tr>
-                    <form method="post">
-                        <td><?php echo $row["player"]; ?> <input type="hidden" name="field_name"
-                                value="Justin Carway" /></td>
-                        <td><?php echo $row["num"]; ?> <input type="text" name="field_num" id="id_num"></td>
-                        <td><?php echo $row["position"]; ?> <input type="text" name="field_position" id="id_position">
-                        </td>
-                        <td><?php echo $row["school"]; ?> <input type="text" name="field_school" id="id_school"></td>
-                        <td><?php echo $row["height"]; ?> <input type="text" name="field_height" id="id_height"></td>
-                        <td><?php echo $row["weight"]; ?> <input type="text" name="field_weight" id="id_weight"></td>
-                        <td><input type="submit" id="submit" name="field_submit_change" value="Submit"></td>
-                    </form>
-                </tr>
-                <?php } ?>
-                <!-- End table body -->
-            </tbody>
-            <!-- End table -->
+              <tr>
+                <form method="post">
+                  <td id="td3"><?php echo $row["player"]; ?> <input type="hidden" name="field_name" value="Justin Carway" /></td>
+                  <td id="td3"><?php echo $row["num"]; ?> <input type="text" name="field_num" id="id_num"></td>
+                  <td id="td3"><?php echo $row["position"]; ?> <input type="text" name="field_position" id="id_position">
+                  </td>
+                  <td id="td3"><?php echo $row["school"]; ?> <input type="text" name="field_school" id="id_school"></td>
+                  <td id="td3"><?php echo $row["height"]; ?> <input type="text" name="field_height" id="id_height"></td>
+                  <td id="td3"><?php echo $row["weight"]; ?> <input type="text" name="field_weight" id="id_weight"></td>
+                  <td id="td3"><input type="submit" id="submit" name="field_submit_change" value="Submit"></td>
+                </form>
+              </tr>
+            <?php } ?>
+            <!-- End table body -->
+          </tbody>
+          <!-- End table -->
         </table>
 
-        <?php } else { ?>
-        <!-- IF query execution resulted in error display the following message-->
+      <?php } else { ?>
+        <!-- If query execution resulted in error display the following message-->
         <h3>Sorry, no results found among player set. </h3>
-        <?php }
+    <?php }
     } ?>
-        <?php
+    <?php
     if (isset($_POST['field_submit_change'])) {
     ?>
-        Player was updated.
-        <?php
-      }
+      Player was updated.
+    <?php
+    }
     ?>
 
-        <br>
-    </div>
+    <br>
+  </div>
 </body>
 
 </html>

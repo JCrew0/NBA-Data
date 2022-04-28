@@ -77,7 +77,7 @@ ALTER TABLE player_2017_stats
 ADD PRIMARY KEY (playerID);
     
     
--- 2018-19 Player stats
+-- 2018-19
 DROP TABLE IF EXISTS player_2018_stats;
 CREATE TABLE IF NOT EXISTS player_2018_stats(
 	SELECT
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS player_2018_stats(
 ALTER TABLE player_2018_stats
 ADD PRIMARY KEY (playerID);
 
--- Player 2019-20 stats
+-- 2019-2020
 DROP TABLE IF EXISTS player_2019_stats;
 CREATE TABLE IF NOT EXISTS player_2019_stats(
 	SELECT
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS player_2019_stats(
 ALTER TABLE player_2019_stats
 ADD PRIMARY KEY (playerID);
 
--- Player 2020-21 stats
+-- 2020-2021
 DROP TABLE IF EXISTS player_2020_stats;
 CREATE TABLE IF NOT EXISTS player_2020_stats(
 	SELECT
@@ -214,7 +214,7 @@ ALTER TABLE player_list_2016
 ADD PRIMARY KEY (playerID);
 
 
--- player list 2017-18
+-- 2017-18
 DROP TABLE IF EXISTS player_list_2017;
 CREATE TABLE IF NOT EXISTS player_list_2017(
 	SELECT 
@@ -235,7 +235,7 @@ ALTER TABLE player_list_2017
 ADD PRIMARY KEY (playerID);
 
 
--- player list 2018-19
+-- 2018-19
 DROP TABLE IF EXISTS player_list_2018;
 CREATE TABLE IF NOT EXISTS player_list_2018(
 	SELECT 
@@ -256,7 +256,7 @@ ALTER TABLE player_list_2018
 ADD PRIMARY KEY (playerID);
 
 
--- player list 2019-20
+-- 2019-20
 DROP TABLE IF EXISTS player_list_2019;
 CREATE TABLE IF NOT EXISTS player_list_2019(
 	SELECT 
@@ -277,7 +277,7 @@ ALTER TABLE player_list_2019
 ADD PRIMARY KEY (playerID);
 
 
--- player list 2019-19
+-- 2020-21
 DROP TABLE IF EXISTS player_list_2020;
 CREATE TABLE IF NOT EXISTS player_list_2020(
 	SELECT 
@@ -297,6 +297,7 @@ CREATE TABLE IF NOT EXISTS player_list_2020(
 ALTER TABLE player_list_2020
 ADD PRIMARY KEY (playerID);
 
+-- Testing all of the results
 SELECT *
 FROM player_2016_stats;
 
